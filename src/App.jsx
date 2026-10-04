@@ -1,5 +1,16 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Activity, Gamepad2, ShieldCheck, History, Flame, Globe } from 'lucide-react';
+import {
+  Activity,
+  Gamepad2,
+  ShieldCheck,
+  History,
+  Flame,
+  Globe,
+  Play,
+  Radio,
+  Sparkles,
+  Zap,
+} from 'lucide-react';
 import IspHeaderCard from './components/IspHeaderCard';
 import GameServerSelector from './components/GameServerSelector';
 import PingTestHUD from './components/PingTestHUD';
@@ -19,6 +30,28 @@ export default function App() {
   useEffect(() => {
     setHistory(getStoredHistory());
   }, []);
+
+  // IntersectionObserver for smooth fade-in animations on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    const elements = document.querySelectorAll('.reveal-on-scroll');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [selection, pingStats]);
 
   // Auto-save test result to history
   const handleTestComplete = useCallback(({ selection: currentSelection, stats: currentStats }) => {
@@ -146,18 +179,78 @@ export default function App() {
         </button>
       </nav>
 
-      {/* Hero Welcome Intro */}
-      <div className="hero-intro">
-        <h2 className="hero-heading">Instant Ping & Latency Telemetry</h2>
+      {/* Modern Hero Section */}
+      <section className="hero-section reveal-on-scroll">
+        <div className="hero-glow-backdrop" />
+
+        {/* Top Feature Pill Badge */}
+        <div className="hero-pill-badge">
+          <span className="hero-pulse-dot" />
+          <span className="hero-pill-text">NEXT-GEN SRI LANKAN GAMING TELEMETRY · SUBSEA OPTIMIZED</span>
+        </div>
+
+        {/* Main Headline with Gradient */}
+        <h2 className="hero-heading">
+          Dominate With <span className="hero-gradient-text">Precision Ping</span> &amp; Zero Lag Spikes
+        </h2>
+
+        {/* Subtext */}
         <p className="hero-subtext">
-          Auto-detect your Sri Lankan ISP connection, select your competitive game and server region, and run precision round-trip latency diagnostics.
+          Precision round-trip latency diagnostics for <strong>SLT-Mobitel</strong>, <strong>Dialog</strong>, and <strong>Hutch</strong>. Test raw in-game UDP socket latency, isolate router bufferbloat, and benchmark ultra-fast DNS resolvers across SEA-ME-WE subsea cable routes.
         </p>
-      </div>
+
+        {/* Quick CTA Actions */}
+        <div className="hero-cta-row">
+          <button
+            type="button"
+            className="hero-primary-btn"
+            onClick={() => scrollToSection('step-ping')}
+          >
+            <Play size={16} fill="#141414" />
+            <span>Launch Live Ping Test</span>
+          </button>
+          <button
+            type="button"
+            className="hero-secondary-btn"
+            onClick={() => scrollToSection('bloat-section')}
+          >
+            <Flame size={16} className="text-moss" />
+            <span>Test Bufferbloat</span>
+          </button>
+        </div>
+
+        {/* Live Feature Highlights Strip */}
+        <div className="hero-features-strip">
+          <div className="hero-feature-item">
+            <Gamepad2 size={16} className="text-moss" />
+            <div className="feature-item-text">
+              <strong>11 Esports Titles</strong>
+              <span>Valorant, CS2, Free Fire &amp; more</span>
+            </div>
+          </div>
+          <div className="hero-feature-divider" />
+          <div className="hero-feature-item">
+            <Radio size={16} className="text-moss" />
+            <div className="feature-item-text">
+              <strong>Subsea Cable Telemetry</strong>
+              <span>SEA-ME-WE 3/5 &amp; BBG Gateways</span>
+            </div>
+          </div>
+          <div className="hero-feature-divider" />
+          <div className="hero-feature-item">
+            <ShieldCheck size={16} className="text-moss" />
+            <div className="feature-item-text">
+              <strong>100% Client-Side</strong>
+              <span>Zero server delay · 100% Private</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Main Multi-Step Flow */}
       <main className="app-main">
         {/* Step 1: ISP Auto-Detection */}
-        <section id="step-isp" className="app-step-section">
+        <section id="step-isp" className="app-step-section reveal-on-scroll">
           <div className="step-badge-row">
             <span className="step-num">STEP 1</span>
             <span className="step-heading">Your Network Connection</span>
@@ -166,7 +259,7 @@ export default function App() {
         </section>
 
         {/* Step 2: Choose Game & Server Region */}
-        <section id="step-game" className="app-step-section">
+        <section id="step-game" className="app-step-section reveal-on-scroll">
           <div className="step-badge-row">
             <span className="step-num">STEP 2</span>
             <span className="step-heading">Select Game & Target Region</span>
@@ -178,7 +271,7 @@ export default function App() {
         </section>
 
         {/* Step 3: Run Real-Time Ping Test */}
-        <section id="step-ping" className="app-step-section">
+        <section id="step-ping" className="app-step-section reveal-on-scroll">
           <div className="step-badge-row">
             <span className="step-num">STEP 3</span>
             <span className="step-heading">Real-Time Latency Probe</span>
@@ -192,7 +285,7 @@ export default function App() {
 
         {/* Step 4: ISP Benchmark Comparison */}
         {selection && pingStats && (
-          <section className="app-step-section">
+          <section id="step-benchmark" className="app-step-section reveal-on-scroll">
             <div className="step-badge-row">
               <span className="step-num">STEP 4</span>
               <span className="step-heading">Sri Lankan ISP Benchmarks</span>
@@ -202,7 +295,7 @@ export default function App() {
         )}
 
         {/* Feature 2: Bufferbloat & Network Congestion Test */}
-        <section id="bloat-section" className="app-step-section">
+        <section id="bloat-section" className="app-step-section reveal-on-scroll">
           <div className="step-badge-row">
             <span className="step-num">TOOL 1</span>
             <span className="step-heading">Bufferbloat & Load Spike Diagnostic</span>
@@ -211,7 +304,7 @@ export default function App() {
         </section>
 
         {/* Feature 4: DNS Benchmark */}
-        <section id="dns-section" className="app-step-section">
+        <section id="dns-section" className="app-step-section reveal-on-scroll">
           <div className="step-badge-row">
             <span className="step-num">TOOL 2</span>
             <span className="step-heading">Sri Lanka DNS Benchmark & Router Setup</span>
@@ -220,7 +313,7 @@ export default function App() {
         </section>
 
         {/* Step 7: Personal Test History & Diagnostics Log */}
-        <section id="history-section" className="app-step-section">
+        <section id="history-section" className="app-step-section reveal-on-scroll">
           <div className="step-badge-row">
             <span className="step-num">LOGS</span>
             <span className="step-heading">Personal Test History & Diagnostics Log</span>
