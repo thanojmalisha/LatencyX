@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="latBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#122014" />
+      <stop offset="65%" stop-color="#0b100c" />
+      <stop offset="100%" stop-color="#060806" />
+    </radialGradient>
+
+    <!-- Neon Green/Cyan Gradient -->
+    <linearGradient id="neonXGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#55ff68" />
+      <stop offset="50%" stop-color="#2BEE34" />
+      <stop offset="100%" stop-color="#00e5b7" />
+    </linearGradient>
+
+    <linearGradient id="pulseLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2BEE34" stop-opacity="0.3" />
+      <stop offset="35%" stop-color="#2BEE34" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="65%" stop-color="#00e5b7" />
+      <stop offset="100%" stop-color="#00e5b7" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="latGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Base Hexagonal / Rounded Card -->
+  <rect x="6" y="6" width="116" height="116" rx="24" fill="url(#latBg)" stroke="#2BEE34" stroke-width="2.5" stroke-opacity="0.4" />
+
+  <!-- Background Radar / Sonar Grid -->
+  <circle cx="64" cy="64" r="44" fill="none" stroke="#2BEE34" stroke-width="1.2" stroke-opacity="0.2" stroke-dasharray="4 4" />
+  <circle cx="64" cy="64" r="28" fill="none" stroke="#2BEE34" stroke-width="1.2" stroke-opacity="0.3" />
+
+  <!-- Radar crosshair lines -->
+  <line x1="64" y1="12" x2="64" y2="34" stroke="#2BEE34" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round" />
+  <line x1="64" y1="94" x2="64" y2="116" stroke="#2BEE34" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round" />
+  <line x1="12" y1="64" x2="34" y2="64" stroke="#2BEE34" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round" />
+  <line x1="94" y1="64" x2="116" y2="64" stroke="#2BEE34" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round" />
+
+  <!-- Stylized Cyber "X" -->
+  <g filter="url(#latGlow)">
+    <!-- Main Left-to-Right diagonal wing of X -->
+    <path d="M28 28 L46 28 L100 100 L82 100 Z" fill="url(#neonXGrad)" opacity="0.9" />
+    <path d="M36 28 L46 28 L92 92 L82 92 Z" fill="#ffffff" opacity="0.4" />
+
+    <!-- Counter Right-to-Left diagonal wing of X -->
+    <path d="M100 28 L82 28 L28 100 L46 100 Z" fill="url(#neonXGrad)" opacity="0.9" />
+    <path d="M92 28 L82 28 L36 92 L46 92 Z" fill="#ffffff" opacity="0.4" />
+
+    <!-- Corner Accents on X -->
+    <polygon points="28,28 38,20 46,28" fill="#55ff68" />
+    <polygon points="100,28 90,20 82,28" fill="#55ff68" />
+    <polygon points="28,100 38,108 46,100" fill="#00e5b7" />
+    <polygon points="100,100 90,108 82,100" fill="#00e5b7" />
+  </g>
+
+  <!-- High-Speed Latency / RTT Pulse Wave Through the Center of X -->
+  <polyline points="14,64 42,64 48,64 54,42 62,86 68,48 74,74 80,64 86,64 114,64" 
+            fill="none" 
+            stroke="url(#pulseLineGrad)" 
+            stroke-width="3.5" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"
+            filter="url(#latGlow)" />
+
+  <!-- Central Pulse Blip Dot -->
+  <circle cx="68" cy="48" r="3" fill="#ffffff" />
+</svg>
