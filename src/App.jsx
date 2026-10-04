@@ -102,6 +102,50 @@ export default function App() {
         </div>
       </header>
 
+      {/* Mobile Quick Navigation Bar (Horizontal Scroll on Mobile) */}
+      <nav className="mobile-quick-nav" aria-label="Quick mobile navigation">
+        <button
+          type="button"
+          className="mobile-nav-chip"
+          onClick={() => scrollToSection('step-ping')}
+        >
+          <Activity size={14} className="text-moss" />
+          <span>Live Ping</span>
+        </button>
+        <button
+          type="button"
+          className="mobile-nav-chip"
+          onClick={() => scrollToSection('step-game')}
+        >
+          <Gamepad2 size={14} className="text-moss" />
+          <span>Games</span>
+        </button>
+        <button
+          type="button"
+          className="mobile-nav-chip"
+          onClick={() => scrollToSection('bloat-section')}
+        >
+          <Flame size={14} className="text-moss" />
+          <span>Bufferbloat</span>
+        </button>
+        <button
+          type="button"
+          className="mobile-nav-chip"
+          onClick={() => scrollToSection('dns-section')}
+        >
+          <Globe size={14} className="text-moss" />
+          <span>DNS Speed</span>
+        </button>
+        <button
+          type="button"
+          className="mobile-nav-chip"
+          onClick={() => scrollToSection('history-section')}
+        >
+          <History size={14} className="text-moss" />
+          <span>History{history.length > 0 ? ` (${history.length})` : ''}</span>
+        </button>
+      </nav>
+
       {/* Hero Welcome Intro */}
       <div className="hero-intro">
         <h2 className="hero-heading">Instant Ping & Latency Telemetry</h2>
@@ -113,7 +157,7 @@ export default function App() {
       {/* Main Multi-Step Flow */}
       <main className="app-main">
         {/* Step 1: ISP Auto-Detection */}
-        <section className="app-step-section">
+        <section id="step-isp" className="app-step-section">
           <div className="step-badge-row">
             <span className="step-num">STEP 1</span>
             <span className="step-heading">Your Network Connection</span>
@@ -122,7 +166,7 @@ export default function App() {
         </section>
 
         {/* Step 2: Choose Game & Server Region */}
-        <section className="app-step-section">
+        <section id="step-game" className="app-step-section">
           <div className="step-badge-row">
             <span className="step-num">STEP 2</span>
             <span className="step-heading">Select Game & Target Region</span>
@@ -134,7 +178,7 @@ export default function App() {
         </section>
 
         {/* Step 3: Run Real-Time Ping Test */}
-        <section className="app-step-section">
+        <section id="step-ping" className="app-step-section">
           <div className="step-badge-row">
             <span className="step-num">STEP 3</span>
             <span className="step-heading">Real-Time Latency Probe</span>

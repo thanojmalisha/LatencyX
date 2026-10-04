@@ -184,6 +184,60 @@ body {
   color: var(--text-white);
 }
 
+/* ===== MOBILE QUICK NAVIGATION BAR ===== */
+
+.mobile-quick-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-quick-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 14px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(8, 10, 8, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-subtle);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .mobile-quick-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-nav-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    background: var(--bg-card-elevated);
+    border: 1px solid var(--border-card);
+    color: var(--text-silver);
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-nav-chip:active {
+    transform: scale(0.95);
+    background: rgba(43, 238, 52, 0.15);
+    border-color: var(--accent-moss);
+    color: var(--accent-moss);
+  }
+}
+
 /* ===== HERO INTRO ===== */
 
 .hero-intro {
@@ -2558,15 +2612,326 @@ body {
   line-height: 1.5;
 }
 
-/* Responsive adjustments */
-@media (max-width: 860px) {
+/* ===== COMPREHENSIVE MOBILE & TOUCH OPTIMIZATIONS ===== */
+
+/* Touch tap highlight reset across all interactive elements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Tablet & Mobile Screens (<= 768px) */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 14px 16px;
+  }
+
+  .header-right {
+    display: none; /* Replaced by the mobile-quick-nav */
+  }
+
+  .hero-intro {
+    margin: 20px auto 10px;
+    padding: 0 16px;
+  }
+
+  .hero-heading {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtext {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .app-main {
+    padding: 0 12px;
+  }
+
+  .app-step-section {
+    margin-bottom: 22px;
+  }
+
+  /* Card paddings */
+  .isp-card,
+  .selector-container,
+  .ping-hud,
+  .bloat-card,
+  .dns-card,
+  .history-card {
+    padding: 18px 14px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Step 1 ISP Card */
+  .isp-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .isp-main-info {
+    width: 100%;
+  }
+
+  .isp-ip-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .isp-toggle-btn {
+    position: absolute;
+    top: 16px;
+    right: 14px;
+  }
+
+  /* Step 2 Game Selector */
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .game-card {
+    padding: 10px 8px;
+    min-height: 56px;
+  }
+
+  .game-card-name {
+    font-size: 0.85rem;
+  }
+
+  .game-card-sub {
+    font-size: 0.65rem;
+  }
+
+  .server-chips-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Step 3 Ping HUD */
+  .ping-launch-group {
+    gap: 12px;
+  }
+
+  .sample-mode-selector {
+    width: 100%;
+    justify-content: center;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .sample-pill {
+    padding: 5px 8px;
+    font-size: 0.7rem;
+  }
+
+  .ping-start-btn {
+    width: 100%;
+    padding: 16px 18px;
+    font-size: 1.05rem;
+  }
+
+  .ping-hero-dual-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .dual-hero-val {
+    font-size: 1.85rem;
+  }
+
+  .ping-gauge-row {
+    padding: 6px 0;
+  }
+
+  .ping-gauge-canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .metric-box {
+    padding: 10px 12px;
+  }
+
+  .metric-value {
+    font-size: 1.3rem;
+  }
+
+  .completion-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .retest-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+
+  /* Step 4 ISP Benchmarks */
+  .benchmark-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .benchmark-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .benchmark-bar-track {
+    width: 100%;
+  }
+
+  /* Step 5 Bufferbloat */
+  .bloat-card-header,
+  .dns-card-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .bloat-run-btn,
+  .bloat-stop-btn,
+  .dns-run-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .bloat-grade-banner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 16px 14px;
+    gap: 12px;
+  }
+
+  .grade-title-row {
+    justify-content: center;
+  }
+
   .bloat-metrics-grid {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
+
+  .bloat-live-telemetry {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
   .advice-content-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Step 6 DNS Benchmark */
   .dns-leaderboard-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .dns-domain-breakdown {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-tab-buttons {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Step 7 History */
+  .history-card-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .history-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .history-action-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 10px;
+  }
+
+  .history-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .history-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .history-filter-group,
+  .history-sort-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .history-select {
+    flex: 1;
+  }
+
+  .history-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .history-item-right {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Extra Small Screens (<= 380px) */
+@media (max-width: 380px) {
+  .logo-title {
+    font-size: 1.1rem;
+  }
+
+  .hero-heading {
+    font-size: 1.35rem;
+  }
+
+  .sample-pill {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .history-stats-bar {
     grid-template-columns: 1fr;
   }
 }
